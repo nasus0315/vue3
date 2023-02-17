@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { reactive, effect, watch, ref } from './reactivity.js';
+        // const state = reactive({
+        //     age: 19,
+        //     name: 'sc',
+        //     flag: true
+        // });
+        // effect(() => {
+        //     console.log('runner');
+        //     app.innerHTML = state.flag ? state.name : state.age;
+        // })
+
+        // watch(() => state.name, (newVAL, oldVAL) => {
+        //     console.log(newVAL, oldVAL);
+        // })
+        // state.name = 'xxxx';
+
+        let p = ref(true);
+        effect(() => {
+            app.innerHTML = p.value
+        })
+        setTimeout(() => {
+            console.log(p);
+            
+            p.value = false;
+        }, 3000);
+    </script>
+</body>
+
+</html>

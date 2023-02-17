@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { reactive, effect } from './reactivity.js';
+        const state = reactive({
+            age: 19,
+            name: 'sc',
+            flag: true
+        });
+        effect(() => {
+            console.log('runner');
+            app.innerHTML = state.flag ? state.name : state.age;
+        })
+        setTimeout(() => {
+            state.flag = false;
+            setTimeout(() => {
+                console.log('修改了name');
+                state.name='xxx' // 此时 不应该更新触发当前name中的effect中的方法
+            }, 3000);
+        }, 3000);
+    </script>
+</body>
+
+</html>
